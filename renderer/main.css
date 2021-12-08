@@ -109,3 +109,7 @@ main {
     width: 20%;
     margin-right: 25px;
 }
+
+.read-item h2 {
+    flex: 1;
+}

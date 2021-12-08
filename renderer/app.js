@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+const items = require('./items');
 
 // DOM nodes
 let showModal = document.getElementById('show-modal'),
@@ -44,8 +45,10 @@ addItem.addEventListener('click', e => {
 
 // Listen for new item from main process
 ipcRenderer.on('new-item-success', (e, newItem) => {
+  // Add new item to "items" node
+  items.addItem(newItem, isNew = true);
+
   toggleModalButtons();
-  console.log(newItem);
   modal.style.display = 'none';
   itemUrl.value = '';
 })
