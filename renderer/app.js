@@ -7,7 +7,42 @@ let showModal = document.getElementById('show-modal'),
     modal = document.getElementById('modal'),
     addItem = document.getElementById('add-item'),
     itemUrl = document.getElementById('url'),
-    search = document.getElementById('search')
+    search = document.getElementById('search');
+
+// Change text in search bar, depending on platform
+if (process.platform === 'darwin') {
+  search.setAttribute('placeholder', 'Search (Cmd + S)');
+}
+else {
+  search.setAttribute('placeholder', 'Search (Ctrl + S)');
+}
+
+
+// Open modal from menu
+ipcRenderer.on('menu-show-modal', () => {
+  showModal.click();
+});
+
+// Open selected item from menu
+ipcRenderer.on('menu-open-item', () => {
+  items.open();
+})
+
+// Delete selected item from menu
+ipcRenderer.on('menu-delete-item', () => {
+  let selectedItem = items.getSelectedItem();
+  items.delete(selectedItem.index);
+})
+
+// Open item in native browser from menu
+ipcRenderer.on('menu-open-item-native', () => {
+  items.openNative();
+})
+
+// Focus search input from the menu
+ipcRenderer.on('menu-focus-search', () => {
+  search.focus();
+})
 
 // Disable and enable modal buttons
 const toggleModalButtons = () => {
