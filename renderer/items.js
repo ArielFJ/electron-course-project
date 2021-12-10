@@ -1,4 +1,12 @@
+const fs = require('fs');
+
 let items = document.getElementById('items');
+
+// Get readerJS content
+let readerJS;
+fs.readFile(`${__dirname}/reader.js`, (err, data) => {
+  readerJS = data.toString();
+})
 
 // Track items
 exports.storage = JSON.parse(localStorage.getItem('readit-items')) || [];
@@ -51,7 +59,19 @@ exports.open = () => {
   // Get item's url
   let contentUrl = selectedItem.dataset.url;
 
-  console.log('Opening item: ', contentUrl);
+  // Open item in proxy BrowserWindow
+  let readerWin = window.open(contentUrl, '', `
+    maxWidth=2000,
+    maxHeight=2000,
+    width=1200,
+    height=800,
+    backgroundColor=#DEDEDE,
+    nodeIntegration=0,
+    contextIsolation=1
+  `);// We use 0 and 1 to represent true and false
+
+  // Inject JavaScript
+  readerWin.eval(readerJS);
 }
 
 // Move to newly selected item
