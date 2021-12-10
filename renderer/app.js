@@ -6,7 +6,8 @@ let showModal = document.getElementById('show-modal'),
     closeModal = document.getElementById('close-modal'),
     modal = document.getElementById('modal'),
     addItem = document.getElementById('add-item'),
-    itemUrl = document.getElementById('url')
+    itemUrl = document.getElementById('url'),
+    search = document.getElementById('search')
 
 // Disable and enable modal buttons
 const toggleModalButtons = () => {
@@ -59,3 +60,21 @@ itemUrl.addEventListener('keyup', e => {
     addItem.click();
   }
 });
+
+// Filter items with "search"
+search.addEventListener('keyup', e => {
+
+  // Loop items
+  Array.from(document.getElementsByClassName('read-item'))
+    .forEach(item => {
+      let hasMatch = item.innerText.toLowerCase().includes(search.value);
+      item.style.display = hasMatch ? 'flex' : 'none';
+    });
+})
+
+// Navigate item selection with up or down arrows
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+    items.changeSelection(e.key);
+  }
+})
