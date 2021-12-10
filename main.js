@@ -32,6 +32,7 @@ function createWindow() {
       // 'contextIsolation' defaults to "true" as from Electron v12
       contextIsolation: false,
       nodeIntegration: true,
+      nativeWindowOpen: false, // Causes window.open create a BrowserWindowProxy
     }
   });
 
