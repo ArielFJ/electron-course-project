@@ -9,7 +9,8 @@
     "start": "electron .",
     "watch": "nodemon --exec electron .",
     "reset": "git reset --hard",
-    "build": "electron-builder "
+    "build": "electron-builder -w",
+    "win-cert": "electron-builder create-self-signed-cert -p magnanym"
   },
   "keywords": [
     "Electron",
@@ -34,7 +35,11 @@
       "target": "dmg"
     },
     "win": {
-      "target": "msi"
+      "target": "msi",
+      "certificateFile": "private/magnanym.pfx",
+      "certificatePassword": "",
+      "verifyUpdateCodeSignature": false,
+      "publisherName": "magnanym"
     },
     "linux": {
       "category": "Utility"
