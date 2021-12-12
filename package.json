@@ -1,26 +1,43 @@
 {
-  "name": "master-electron",
+  "name": "Readit",
   "version": "1.0.0",
-  "description": "Master Electron Course Code",
+  "description": "Master Electron Project",
   "main": "main.js",
+  "homepage": "https://github.com/stackacademytv/master-electron",
+  "repository": "https://github.com/stackacademytv/master-electron",
   "scripts": {
     "start": "electron .",
     "watch": "nodemon --exec electron .",
-    "reset": "git reset --hard"
+    "reset": "git reset --hard",
+    "build": "electron-builder "
   },
-  "repository": "https://github.com/stackacademytv/master-electron",
   "keywords": [
     "Electron",
     "Master Electron",
     "demo"
   ],
-  "author": "GitHub, Stackacademytv",
+  "author": "ArielFJ",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^16.0.4",
+    "electron-builder": "^22.14.5",
     "nodemon": "^2.0.0"
   },
   "dependencies": {
     "electron-window-state": "^5.0.3"
+  },
+  "build": {
+    "appId": "com.magnanym.readit",
+    "copyright": "Copyright Magnanym",
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "msi"
+    },
+    "linux": {
+      "category": "Utility"
+    }
   }
 }
